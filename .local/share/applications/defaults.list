@@ -1,0 +1,3 @@
+[Default Applications]
+application/pdf=kde4/okular.desktop
+application/vnd.oasis.opendocument.text=libreoffice3.6-writer.desktop

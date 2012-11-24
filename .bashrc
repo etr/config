@@ -137,5 +137,6 @@ scan() { e="$1"; shift; less -i -p "*$e" "$@"; }
 ord() { printf "0x%x\n" "'$1"; }
 chr() { printf $(printf '\\%03o\\n' "$1"); }
 
-. .bash_profile
-. /etc/bash_completion
+export BROWSER=google-chrome
+
+. /etc/bash_completion.d/*
