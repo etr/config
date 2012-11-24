@@ -151,3 +151,63 @@ if has("autocmd")
     au BufRead,BufNewFile * let x=expand('%:p:h')."/.lvimrc" | if filereadable(x) | exe "source ".substitute(x, ' ', '\\ ', 'g') | endif
     let x=expand('%:p:h')."/.lvimrc" | if filereadable(x) | exe "source ".substitute(x, ' ', '\\ ', 'g') | endif
 endif
+
+" Strip the newline from the end of a string
+function! Chomp(str)
+  return substitute(a:str, '\n$', '', '')
+endfunction
+
+" Find a file and pass it to cmd
+function! DmenuOpen(cmd)
+  let fname = Chomp(system("git ls-files | dmenu -i -l 20 -p " . a:cmd))
+  if empty(fname)
+    return
+  endif
+  execute a:cmd . " " . fname
+endfunction
+
+" Allow usage of Dmenu as file searcher
+map <c-t> :call DmenuOpen("tabe")<cr>
+map <c-f> :call DmenuOpen("e")<cr>
+
+" Enable usage of NERDTree
+map <F2> <esc>:NERDTreeToggle<cr>
+map <F3> <esc>:TlistToggle<cr>
+
+" highlight if 80 char per line is exceeded
+autocmd FileType cpp highlight OverLength ctermbg=red ctermfg=white
+autocmd FileType python highlight OverLength ctermbg=red ctermfg=white
+" guibg=#592929
+autocmd FileType cpp match OverLength /\%81v.\+/
+
+" make easy access
+let $makejarg=""
+fun! SetMkfile()
+  let filemk = "Makefile"
+  let buildpt = "build/"
+  let pathmk = "./"
+  let depth = 1
+  while depth < 4
+    if filereadable(pathmk . filemk)
+      return pathmk
+    endif
+    if filereadable(pathmk . buildpt . filemk)
+      return pathmk . buildpt
+    endif
+    let depth += 1
+    let pathmk = "../" . pathmk
+  endwhile
+  return "."
+endf
+command! -nargs=* Make | let $mkpath=SetMkfile() | make <args> $makejarg -C $mkpath | cwindow 5 
+
+map <F6> <esc>:Make<cr>
+
+"omnifunc code complete
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+autocmd FileType cpp set omnifunc=ccomplete#Complete
