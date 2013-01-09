@@ -53,7 +53,7 @@ export MALLOC_PERTURB_=$(($RANDOM % 255 + 1))
 #######################################
 
 # highlight $HOST:$PWD prompt
-PS1='\[\e[1m\]\u@\h:\w\$\[\e[0m\](__git_ps1 "@%s")$ '
+PS1='\[\e[1m\]\u@\h:\w\[\e[0m\]$(__git_ps1 "[%s]")$ '
 
 # don't put duplicate lines in the history. See bash(1) for more options
 # don't overwrite GNU Midnight Commander's setting of `ignorespace'.
