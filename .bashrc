@@ -9,6 +9,8 @@
 # user specific environment
 #######################################
 
+for f in `ls /etc/bash_completion.d`; do source /etc/bash_completion.d/$f; done
+
 # for mc, cvs, svn, ...
 export EDITOR=vim
 
@@ -51,16 +53,31 @@ export MALLOC_PERTURB_=$(($RANDOM % 255 + 1))
 #######################################
 
 # highlight $HOST:$PWD prompt
-PS1='\[\e[1m\]\u@\h:\w\$\[\e[0m\] '
+PS1='\[\e[1m\]\u@\h:\w\$\[\e[0m\]$(__git_ps1 "@%s") '
 
+# don't put duplicate lines in the history. See bash(1) for more options
+# don't overwrite GNU Midnight Commander's setting of `ignorespace'.
+HISTCONTROL=$HISTCONTROL${HISTCONTROL+:}ignoredups
 # Don't store duplicate adjacent items in the history
 HISTCONTROL=ignoreboth
+HISTIGNORE='ls:bg:fg:history'
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+#Bigger history file size
+unset HISTFILESIZE
+HISTSIZE=1000000
+
+#history time format
+HISTTIMEFORMAT='%F %T '
+PROMPT_COMMAND='history -a; history -n'
 
 # adjust settings according to current terminal window width
 # which may have changed while the last command was running
 # (which is a common occurance for vim/less/etc.)
 # Note this is already set in /etc/bashrc on Fedora 8 at least.
-shopt -s checkwinsize
+#shopt -s checkwinsize
 
 # GREP_COLOR=bright yellow on black bg.
 # use GREP_COLOR=7 to highlight whitespace on black terminals
@@ -138,5 +155,4 @@ ord() { printf "0x%x\n" "'$1"; }
 chr() { printf $(printf '\\%03o\\n' "$1"); }
 
 export BROWSER=google-chrome
-
-. /etc/bash_completion.d/*
+export P4CONFIG=~/.p4settings

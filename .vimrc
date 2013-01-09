@@ -159,7 +159,7 @@ endfunction
 
 " Find a file and pass it to cmd
 function! DmenuOpen(cmd)
-  let fname = Chomp(system("( git ls-files ; svn list ) | dmenu -i -l 20 -p " . a:cmd))
+  let fname = Chomp(system("git ls-files | dmenu -i -l 20 -p " . a:cmd))
   if empty(fname)
     return
   endif
