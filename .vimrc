@@ -166,6 +166,17 @@ function! DmenuOpen(cmd)
   execute a:cmd . " " . fname
 endfunction
 
+function! ToggleCopyMode()
+    if &mouse == 'a'
+        set mouse=
+        set nonumber
+        echo "Copy mode!"
+    else
+        set mouse=a
+        set number
+    endif
+endfunction
+
 " Allow usage of Dmenu as file searcher
 map <c-t> :call DmenuOpen("tabe")<cr>
 map <c-f> :call DmenuOpen("e")<cr>
@@ -173,6 +184,7 @@ map <c-f> :call DmenuOpen("e")<cr>
 " Enable usage of NERDTree
 map <F2> <esc>:NERDTreeToggle<cr>
 map <F3> <esc>:TlistToggle<cr>
+map <F12> <esc>:call ToggleCopyMode()<cr>
 
 " highlight if 80 char per line is exceeded
 autocmd FileType cpp highlight OverLength ctermbg=red ctermfg=white
