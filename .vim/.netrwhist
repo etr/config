@@ -1,6 +1,9 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_cnt =7
 let g:netrw_dirhist_1='/home/etr/progs/itvbackend2/CMakeModules'
 let g:netrw_dirhist_2='/home/etr/progs/libhttpserver/redhat'
 let g:netrw_dirhist_3='/home/etr/progs/itvbackend3/src/boadapters/epgbdbcache'
 let g:netrw_dirhist_4='/home/etr/progs/itvbackend3/src/boadapters/epgbdbcache/src'
+let g:netrw_dirhist_5='/etc/bash_completion.d'
+let g:netrw_dirhist_6='/home/etr/progs/libhttpserver/src'
+let g:netrw_dirhist_7='/home/etr/progs/perforce/smerlino_gattaca_42/iTvManager/ML/Server/minerva-xtv/xtv-ws-edge-integrated'

@@ -9,6 +9,8 @@ set grepprg=grep\ -nH\ $*
 set background=dark
 set number
 
+"colorscheme desert
+
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
@@ -137,7 +139,11 @@ if has("autocmd")
     " Forced file types for some extensions
     au BufNewFile,BufRead *.thtml setfiletype php
     au BufNewFile,BufRead *.tex setfiletype tex
+    au BufNewFile,BufRead *.hpp setfiletype cpp
     au BufNewFile,BufRead *.as setfiletype actionscript 
+
+    au! Syntax slice source ~/.vim/syntax/slice.vim
+    au BufNewFile,BufRead *.ice setfiletype slice
 
     " Filetype-dependent autocommands
     au FileType java set makeprg=ant\ -emacs
@@ -170,10 +176,12 @@ function! ToggleCopyMode()
     if &mouse == 'a'
         set mouse=
         set nonumber
+        set paste
         echo "Copy mode!"
     else
         set mouse=a
         set number
+        set nopaste
     endif
 endfunction
 
