@@ -196,9 +196,12 @@ map <F12> <esc>:call ToggleCopyMode()<cr>
 
 " highlight if 80 char per line is exceeded
 autocmd FileType cpp highlight OverLength ctermbg=red ctermfg=white
+autocmd FileType hpp highlight OverLength ctermbg=red ctermfg=white
+autocmd FileType h highlight OverLength ctermbg=red ctermfg=white
 autocmd FileType python highlight OverLength ctermbg=red ctermfg=white
 " guibg=#592929
 autocmd FileType cpp match OverLength /\%81v.\+/
+autocmd FileType hpp match OverLength /\%81v.\+/
 autocmd FileType python match OverLength /\%81v.\+/
 
 " make easy access
