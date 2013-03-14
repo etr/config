@@ -9,6 +9,14 @@
 # user specific environment
 #######################################
 
+set -o vi
+
+have() 
+{ 
+    unset -v have 
+    PATH=$PATH:/sbin:/usr/sbin:/usr/local/sbin type $1 >&/dev/null && have="yes" 
+}
+
 for f in `ls /etc/bash_completion.d`; do source /etc/bash_completion.d/$f; done
 
 # for mc, cvs, svn, ...

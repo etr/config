@@ -17,6 +17,8 @@ font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+# slock
+bindsym ctrl+$mod+l exec slock
 # start a terminal
 bindsym $mod+Return exec xterm
 
