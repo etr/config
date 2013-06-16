@@ -63,6 +63,10 @@ set undofile
 "set undoreload=10000 "maximum number lines to save for undo on a buffer reload
 
 set mouse=a
+" Reach the line while searching
+set incsearch
+" Ignore files which name matches
+set wildignore=*.o,*.obj,*.bak,*.exe,*.a,*.so
 
 " Key mappings
 " -----------------------------------------------------------------------------
@@ -238,3 +242,12 @@ autocmd FileType cpp set omnifunc=ccomplete#Complete
 
 "swaps current word with the following
 nmap <silent> gw    "_yiw:s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<cr><c-o><c-l>
+" reach directory of file in selected buffer
+autocmd BufEnter * lcd %:p:h
+
+" automatically remove trailing whitespaces
+set wrap
+set linebreak
+" note trailing space at end of next line
+set showbreak=>\ \ \
+autocmd FileType c,cpp,h,hpp,java,php autocmd BufWritePre <buffer> :%s/\s\+$//e
